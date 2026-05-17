@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import Image from "next/image";
+import { MediaImage } from "@/components/ui/media-image";
 import Link from "next/link";
 import { use, useCallback, useEffect, useRef, useState } from "react";
 import { useDragScroll } from "@/hooks/use-drag-scroll";
@@ -264,7 +264,7 @@ export default function AlbumPage({
                   transition={{ duration: 0.5 }}
                   className="relative h-full min-h-0 w-full flex-1"
                 >
-                  <Image
+                  <MediaImage
                     src={getMediaUrl(
                       media[currentIndex]?.path ?? album.cover_path ?? ""
                     )}
@@ -336,7 +336,7 @@ export default function AlbumPage({
                         : "border-transparent opacity-60 hover:opacity-100"
                     )}
                   >
-                    <Image
+                    <MediaImage
                       src={getMediaUrl(item.path)}
                       alt=""
                       fill
@@ -379,7 +379,7 @@ export default function AlbumPage({
                     i % 2 ? "aspect-[4/5]" : "aspect-square"
                   )}
                 >
-                  <Image
+                  <MediaImage
                     src={getMediaUrl(item.path)}
                     alt={item.alt_text ?? album.title}
                     fill

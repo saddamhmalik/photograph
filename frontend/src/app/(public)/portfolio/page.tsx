@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
+import { MediaImage } from "@/components/ui/media-image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useDragScroll } from "@/hooks/use-drag-scroll";
@@ -86,7 +86,7 @@ export default function PortfolioPage() {
                     i % 3 === 0 ? "aspect-[3/4]" : i % 3 === 1 ? "aspect-square" : "aspect-[4/5]"
                   }`}
                 >
-                  <Image
+                  <MediaImage
                     src={getMediaUrl(album.cover_path ?? "")}
                     alt={album.title}
                     fill

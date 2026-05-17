@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { MediaImage } from "@/components/ui/media-image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { api, getAuthToken } from "@/lib/api";
 import { revalidatePublicCache } from "@/lib/revalidate-public";
-import { getMediaUrl } from "@/lib/utils";
 import type { Album } from "@/types";
 
 export default function AdminAlbumsPage() {
@@ -101,8 +100,8 @@ export default function AdminAlbumsPage() {
             <div key={album.uuid} className="glass overflow-hidden rounded-xl">
               <div className="relative aspect-[4/3] bg-surface">
                 {album.cover_path ? (
-                  <Image
-                    src={getMediaUrl(album.cover_path)}
+                  <MediaImage
+                    src={album.cover_path}
                     alt={album.title}
                     fill
                     className="object-cover"

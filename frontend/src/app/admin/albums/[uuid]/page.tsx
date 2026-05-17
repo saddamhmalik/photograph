@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { MediaImage } from "@/components/ui/media-image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { use, useCallback, useEffect, useRef, useState } from "react";
@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { api, getAuthToken } from "@/lib/api";
 import { revalidatePublicCache } from "@/lib/revalidate-public";
-import { getMediaUrl } from "@/lib/utils";
 import type { Album, AlbumMedia, PortfolioCategory } from "@/types";
 
 export default function AdminAlbumEditPage({
@@ -341,8 +340,8 @@ export default function AdminAlbumEditPage({
             <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3">
               {media.map((item) => (
                 <div key={item.uuid} className="group relative aspect-square overflow-hidden rounded-lg bg-surface">
-                  <Image
-                    src={getMediaUrl(item.path)}
+                  <MediaImage
+                    src={item.path}
                     alt={item.alt_text ?? ""}
                     fill
                     className="object-cover"

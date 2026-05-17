@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
+import { MediaImage } from "@/components/ui/media-image";
 import { FadeReveal } from "@/components/animations/FadeReveal";
 
 interface AboutSectionProps {
@@ -25,7 +25,7 @@ export function AboutSection({ label, bio, images }: AboutSectionProps) {
           viewport={{ once: true }}
           transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
         >
-          <Image src={floats[0]} alt="" fill className="object-cover" sizes="180px" />
+          <MediaImage src={floats[0]} alt="" fill className="object-cover" sizes="180px" />
         </motion.div>
       )}
 
@@ -37,7 +37,7 @@ export function AboutSection({ label, bio, images }: AboutSectionProps) {
           viewport={{ once: true }}
           transition={{ duration: 1.2, delay: 0.15 }}
         >
-          <Image src={floats[1]} alt="" fill className="object-cover" sizes="200px" />
+          <MediaImage src={floats[1]} alt="" fill className="object-cover" sizes="200px" />
         </motion.div>
       )}
 
@@ -62,7 +62,7 @@ export function AboutSection({ label, bio, images }: AboutSectionProps) {
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
         >
-          <Image src={floats[2]} alt="" fill className="object-cover" sizes="200px" />
+          <MediaImage src={floats[2]} alt="" fill className="object-cover" sizes="200px" />
         </motion.div>
       )}
     </section>

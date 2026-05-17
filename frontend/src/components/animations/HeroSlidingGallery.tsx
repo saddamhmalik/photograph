@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import Image from "next/image";
+import { MediaImage } from "@/components/ui/media-image";
 import { useEffect, useState } from "react";
 
 interface HeroSlidingGalleryProps {
@@ -59,7 +59,7 @@ export function HeroSlidingGallery({
           transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
           className="hero-ken-burns absolute inset-0"
         >
-          <Image
+          <MediaImage
             src={slides[index]}
             alt=""
             fill

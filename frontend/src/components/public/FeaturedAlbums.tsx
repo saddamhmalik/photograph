@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
+import { MediaImage } from "@/components/ui/media-image";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade, Pagination } from "swiper/modules";
@@ -45,7 +45,7 @@ export function FeaturedAlbums({ albums, section }: FeaturedAlbumsProps) {
                   href={`/albums/${album.slug}`}
                   className="group relative block aspect-[21/9] overflow-hidden"
                 >
-                  <Image
+                  <MediaImage
                     src={getMediaUrl(album.cover_path ?? "")}
                     alt={album.title}
                     fill
@@ -95,7 +95,7 @@ export function FeaturedAlbums({ albums, section }: FeaturedAlbumsProps) {
                   href={`/albums/${album.slug}`}
                   className="card-hover group relative block aspect-[4/5] overflow-hidden rounded-xl"
                 >
-                <Image
+                <MediaImage
                   src={getMediaUrl(album.cover_path ?? "")}
                   alt={album.title}
                   fill

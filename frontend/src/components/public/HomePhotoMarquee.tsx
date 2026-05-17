@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
+import { MediaImage } from "@/components/ui/media-image";
 
 interface HomePhotoMarqueeProps {
   images: string[];
@@ -26,7 +26,7 @@ function MarqueeRow({
             key={src + "-" + i}
             className="relative h-36 w-52 shrink-0 overflow-hidden rounded-xl border border-gold/20 shadow-lg shadow-black/40 md:h-44 md:w-64"
           >
-            <Image src={src} alt="" fill className="object-cover" sizes="260px" />
+            <MediaImage src={src} alt="" fill className="object-cover" sizes="260px" />
             <div className="absolute inset-0 bg-gradient-to-t from-background/50 to-transparent" />
           </div>
         ))}
