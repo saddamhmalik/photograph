@@ -27,8 +27,8 @@ export default function AdminLoginPage() {
       const msg = err instanceof Error ? err.message : "";
       setError(
         msg.includes("credentials") || msg.includes("422")
-          ? "Invalid credentials. Try demo@lenscraft.in / password123"
-          : msg || "Cannot reach API. Start backend on http://localhost:8000"
+          ? "Invalid email or password."
+          : msg || "Cannot reach the API. Check that the backend is running."
       );
     } finally {
       setLoading(false);
@@ -41,8 +41,8 @@ export default function AdminLoginPage() {
         <p className="text-xs uppercase tracking-[0.4em] text-gold">Admin</p>
         <h1 className="mt-2 font-display text-4xl">Sign In</h1>
         <form onSubmit={handleSubmit} className="mt-8 space-y-4">
-          <Input name="email" type="email" placeholder="Email" defaultValue="demo@lenscraft.in" required />
-          <Input name="password" type="password" placeholder="Password" defaultValue="password123" required />
+          <Input name="email" type="email" placeholder="Email" autoComplete="email" required />
+          <Input name="password" type="password" placeholder="Password" autoComplete="current-password" required />
           {error && <p className="text-sm text-red-400">{error}</p>}
           <Button type="submit" className="w-full" disabled={loading}>
             {loading ? "Signing in..." : "Sign In"}
