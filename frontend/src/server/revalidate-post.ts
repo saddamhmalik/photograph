@@ -1,5 +1,6 @@
 import { revalidatePath, revalidateTag } from "next/cache";
-import { NextRequest, NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 import { resolveApiBaseUrl } from "@/lib/api-base";
 
 async function verifyAdminToken(token: string): Promise<boolean> {
@@ -14,7 +15,9 @@ async function verifyAdminToken(token: string): Promise<boolean> {
   return res.ok;
 }
 
-export async function POST(request: NextRequest) {
+export async function revalidatePublicPost(
+  request: NextRequest
+): Promise<Response> {
   const auth = request.headers.get("authorization");
   const token = auth?.startsWith("Bearer ") ? auth.slice(7) : null;
 

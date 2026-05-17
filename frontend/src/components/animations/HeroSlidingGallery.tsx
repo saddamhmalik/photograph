@@ -66,7 +66,6 @@ export function HeroSlidingGallery({
             priority={index === 0}
             className="object-cover object-center"
             sizes="100vw"
-            quality={85}
           />
         </motion.div>
       </AnimatePresence>

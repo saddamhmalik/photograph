@@ -5,7 +5,7 @@ export async function revalidatePublicCache(albumSlug?: string): Promise<void> {
   if (!token) return;
 
   try {
-    await fetch("/revalidate", {
+    await fetch("/admin/revalidate", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
