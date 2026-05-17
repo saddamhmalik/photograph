@@ -17,6 +17,15 @@ if [ -z "${CERTBOT_EMAIL:-}" ]; then
   exit 1
 fi
 
+CERT_PATH="/etc/letsencrypt/live/${CERT_DOMAIN}/fullchain.pem"
+
+if docker compose exec -T nginx test -f "${CERT_PATH}" 2>/dev/null; then
+  echo "Certificate already exists for ${CERT_DOMAIN}."
+  docker compose exec -T nginx nginx -s reload 2>/dev/null || docker compose up -d nginx
+  echo "Nginx reloaded. Use https://${CERT_DOMAIN} and http://${CERT_DOMAIN}"
+  exit 0
+fi
+
 docker compose --profile cert run --rm certbot certonly \
   --webroot \
   -w /var/www/certbot \
@@ -26,6 +35,6 @@ docker compose --profile cert run --rm certbot certonly \
   --no-eff-email \
   --non-interactive
 
-docker compose restart nginx
+docker compose up -d --force-recreate nginx
 
 echo "Certificate issued for ${CERT_DOMAIN}. Open https://${CERT_DOMAIN}"
