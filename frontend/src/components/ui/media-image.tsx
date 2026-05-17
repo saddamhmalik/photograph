@@ -1,5 +1,4 @@
-import { getMediaUrl } from "@/lib/utils";
-import { cn } from "@/lib/utils";
+import { cn, getMediaUrl } from "@/lib/utils";
 
 type MediaImageProps = {
   src: string;

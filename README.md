@@ -68,6 +68,26 @@ cp .env.example .env
 docker compose up -d
 ```
 
+### TLS (Let’s Encrypt, free SSL)
+
+Pick `CERT_DOMAIN` (hostname only, same as DNS) and a real **`CERTBOT_EMAIL`** in `.env`. Open inbound **TCP 80** and **TCP 443** on the EC2 security group.
+
+1. Deploy with HTTP first so **`http://photo.codikal.com/.well-known/acme-challenge/`** (your real host) resolves.
+2. Request the certificate:
+
+   ```bash
+   chmod +x docker/scripts/issue-letsencrypt.sh docker/scripts/renew-letsencrypt.sh
+   docker/scripts/issue-letsencrypt.sh
+   ```
+
+3. After certs exist under `/etc/letsencrypt/live/<CERT_DOMAIN>/`, restart nginx; it switches to HTTPS and redirects plain HTTP → HTTPS (ACME stays on port 80).
+4. Switch app URLs to HTTPS: **`PUBLIC_URL`**, **`APP_URL`**, **`FRONTEND_URL`**, **`CORS_ALLOWED_ORIGINS`**, **`backend/.env` `SESSION_SECURE_COOKIE=true`**, rebuild the frontend (`docker compose build --no-cache frontend`), then **`docker compose exec backend php artisan config:clear`**.
+5. Cron example for renewal (weekly):
+
+   ```bash
+   0 3 * * * cd /path/to/photo && ./docker/scripts/renew-letsencrypt.sh >> /var/log/certbot-renew.log 2>&1
+   ```
+
 ## API (single site)
 
 Base URL: `/api/v1`
@@ -107,4 +127,3 @@ Controller → Service → Repository → Model
 ```
 
 Public routes resolve the photographer via `PhotographerRepository::current()` (env `PHOTOGRAPHER_ID` or first active record).
-# photograph
