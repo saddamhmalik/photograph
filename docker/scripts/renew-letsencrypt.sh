@@ -1,8 +1,11 @@
 #!/bin/sh
+set -e
 
-ROOT="$(dirname "$0")/../.."
-
+ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 cd "${ROOT}"
+
+# shellcheck disable=SC1091
+. "${ROOT}/docker/scripts/load-env.sh"
 
 docker compose --profile cert run --rm certbot renew --quiet
 
